@@ -1,0 +1,90 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .container {
+            background: white;
+            max-width: 450px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px #cccccc;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 6px;
+        }
+
+        button {
+            background: #1677ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        li {
+            text-align: left;
+            margin: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Expense Tracker</h1>
+
+        <h2>Total: ₹<span id="total">0</span></h2>
+
+        <input type="text" id="name" placeholder="Expense name">
+        <input type="number" id="amount" placeholder="Amount">
+
+        <button onclick="addExpense()">Add Expense</button>
+
+        <h3>Expense History</h3>
+        <ul id="expenses"></ul>
+    </div>
+
+    <script>
+        let total = 0;
+
+        function addExpense() {
+            const name = document.getElementById("name").value.trim();
+            const amount = Number(document.getElementById("amount").value);
+
+            if (!name || !Number.isFinite(amount) || amount <= 0) {
+                alert("Enter a valid expense name and amount.");
+                return;
+            }
+
+            total += amount;
+
+            document.getElementById("total").textContent =
+                total.toLocaleString("en-IN");
+
+            const item = document.createElement("li");
+            item.textContent = name + " - ₹" +
+                amount.toLocaleString("en-IN");
+
+            document.getElementById("expenses").appendChild(item);
+
+            document.getElementById("name").value = "";
+            document.getElementById("amount").value = "";
+        }
+    </script>
+</body>
+</html>
+```
